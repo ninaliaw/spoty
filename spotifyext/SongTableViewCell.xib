@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="SongTableViewCell" customModule="spotifyext" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h1G-lt-SF9">
+                        <rect key="frame" x="12" y="6" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="ENG-P4-EZv"/>
+                            <constraint firstAttribute="width" constant="48" id="ofl-fh-AY7"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-n5-1Mi">
+                        <rect key="frame" x="70" y="35" width="38.5" height="15"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="15"/>
+                        <color key="textColor" systemColor="systemGreenColor"/>
+                        <color key="highlightedColor" systemColor="systemPinkColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vec-br-Wac">
+                        <rect key="frame" x="70" y="8" width="104" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="ZGy-ck-T59"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="h1G-lt-SF9" secondAttribute="bottom" constant="6" id="1qs-zn-7ia"/>
+                    <constraint firstItem="Vec-br-Wac" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="5sg-j7-hC0"/>
+                    <constraint firstItem="hdf-n5-1Mi" firstAttribute="leading" secondItem="h1G-lt-SF9" secondAttribute="trailing" constant="10" id="6YF-ps-hcO"/>
+                    <constraint firstItem="h1G-lt-SF9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="9P1-Wy-k9C"/>
+                    <constraint firstAttribute="bottom" secondItem="hdf-n5-1Mi" secondAttribute="bottom" constant="10" id="bUc-43-f9p"/>
+                    <constraint firstItem="h1G-lt-SF9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="mGJ-2R-fEh"/>
+                    <constraint firstItem="Vec-br-Wac" firstAttribute="leading" secondItem="h1G-lt-SF9" secondAttribute="trailing" constant="10" id="mLy-VZ-H8l"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="albumArt" destination="h1G-lt-SF9" id="sYb-Pp-Q5G"/>
+                <outlet property="artistName" destination="hdf-n5-1Mi" id="kvK-Xs-iOW"/>
+                <outlet property="songTitle" destination="Vec-br-Wac" id="3yg-QP-ZcM"/>
+            </connections>
+            <point key="canvasLocation" x="185.50724637681162" y="66.294642857142861"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

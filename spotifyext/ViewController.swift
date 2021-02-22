@@ -11,69 +11,130 @@ import AlamofireImage
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    static var token: String?
+    
     var tracks = [TrackItemData]()
+    var artists = [ArtistItemData]()
+    var searchType : String = ""
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tracks.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let imageUrl = tracks[indexPath.row].album.images.first?.url {
-            AF.request(imageUrl).responseImage { resp in
-                switch resp.result {
-                case .success(let image):
-                    self.coverArt.image = image
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = tracks[indexPath.row].name
-        return cell
-    }
-    
-
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var accessToken: UITextField!
     @IBOutlet weak var typeToggle: UISegmentedControl!
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var coverArt: UIImageView!
+    @IBOutlet weak var nowPlayingButton: NSLayoutConstraint!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var libraryButton: UIButton!
     
+    
+    // // // // // // //
+    
+    @IBAction func onPlayer(_ sender: Any) {
+        //
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "PlayerViewController")
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchType == "track" {
+            return tracks.count
+        }
+        return artists.count
+    }
+    
+    //if selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+        if searchType == "track" {
+            print(tracks[indexPath.row].name)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if searchType == "track" {
+            // SONG STUFF
+            if let cell = table.dequeueReusableCell(withIdentifier: "SongTableViewCell") as? SongTableViewCell {
+                cell.songTitle.text = tracks[indexPath.row].name
+                cell.artistName.text = tracks[indexPath.row].artists.first?.name
+                
+                    if let imageUrl = tracks[indexPath.row].album.images.first?.url {
+                        AF.request(imageUrl).responseImage { resp in
+                            switch resp.result {
+                            case .success(let image):
+                                cell.albumArt.image = image
+                            case .failure(let error):
+                                print(error)
+                            }
+                          }
+                    }
+    
+                   return cell
+               }
+            
+        } else {
+            // ARTIST STUFF
+            if let cell = table.dequeueReusableCell(withIdentifier: "ArtistTableViewCell") as? ArtistTableViewCell {
+                cell.artistName.text = artists[indexPath.row].name
+                
+                if let imageUrl = artists[indexPath.row].images.first?.url {
+                        AF.request(imageUrl).responseImage { resp in
+                            switch resp.result {
+                            case .success(let image):
+                                cell.artistPFP.image = image
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                   return cell
+               }
+        }
+           
+        return UITableViewCell()
+    }
+    
+    private func registerTableViewCells() {
+        let textFieldCell = UINib(nibName: "SongTableViewCell",
+                                  bundle: nil)
+        self.table.register(textFieldCell,
+                                forCellReuseIdentifier: "SongTableViewCell")
+        
+        let artistTextFieldCell = UINib(nibName: "ArtistTableViewCell",
+                                  bundle: nil)
+        self.table.register(artistTextFieldCell,
+                                forCellReuseIdentifier: "ArtistTableViewCell")
+    }
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         table.delegate = self
         table.dataSource = self
-        // Do any additional setup after loading the view.
+        
+        self.registerTableViewCells()
+        
     }
 
     @IBAction func onSearch(_ sender: Any) {
         
-        let searchType: String = typeToggle.titleForSegment(at: typeToggle.selectedSegmentIndex)!
+        ViewController.token = accessToken.text
         
-        print(searchType)
-        print("YEETO CHEETO\n\n******************\n\n****************")
-//        if typeToggle.selectedSegmentIndex != 0 {
-//            searchType = "type"
-//            print("yeetTo")
-//        }
-        
-//        let parameters: [String:Any] = ["q": searchTextField.text!,
-//                                        "type": typeToggle.titleForSegment(at: typeToggle.selectedSegmentIndex))
-//                        ]
+        //**** SHOULD do a search/switch when toggle switches! *****
+        //
+        /////// hello hihihahaha
+        ////
+        //
+            ///
+            ///
+        searchType = typeToggle.titleForSegment(at: typeToggle.selectedSegmentIndex)!
         
         let parameters: [String:Any] = ["q": searchTextField.text!,
                                         "type": searchType,
 //                                        "limit": 2
                         ]
-//
-//        print(parameters.index(forKey: "type"))
-        
         
         let hdr = HTTPHeaders(
             ["Authorization": "Bearer \(accessToken.text!)",
@@ -86,7 +147,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                          
                         switch resp.result {
                         case .success(let artistData):
-                            print(artistData)
+                            self.artists = artistData.artists.items
+                            self.table.reloadData()
                         case .failure(let error):
                             print(error)
                        }
@@ -100,19 +162,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         case .success(let trackData):
                             self.tracks = trackData.tracks.items
                             self.table.reloadData()
-                            print(trackData)
+//                            print(trackData)
                         case .failure(let error):
                             print(error)
                        }
                     }
-//            AF.request("https://api.spotify.com/v1/search",
-//                       parameters: parameters,
-//                       headers: hdr).responseJSON(completionHandler: { (result) in
-//                            print(result)
-//                       })
         }
         
         
     }
+    
+    
+    
 }
 

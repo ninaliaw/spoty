@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ArtistTableViewCell" customModule="spotifyext" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="26M-Kw-mAS">
+                        <rect key="frame" x="12" y="6" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="BAt-lI-Lye"/>
+                            <constraint firstAttribute="height" constant="48" id="hnc-3V-JPy"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ye-JH-ky7">
+                        <rect key="frame" x="70" y="18" width="107" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="1N8-Xf-CCZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="2Ye-JH-ky7" firstAttribute="leading" secondItem="26M-Kw-mAS" secondAttribute="trailing" constant="10" id="FSG-Pv-aMT"/>
+                    <constraint firstAttribute="bottom" secondItem="26M-Kw-mAS" secondAttribute="bottom" constant="6" id="U2o-va-e1f"/>
+                    <constraint firstItem="26M-Kw-mAS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="X19-Ju-H8G"/>
+                    <constraint firstItem="26M-Kw-mAS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="Xgj-2M-uwx"/>
+                    <constraint firstItem="2Ye-JH-ky7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ts1-6i-e0n"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="artistName" destination="2Ye-JH-ky7" id="FCa-H9-UyC"/>
+                <outlet property="artistPFP" destination="26M-Kw-mAS" id="MXo-K3-tjx"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="71.651785714285708"/>
+        </tableViewCell>
+    </objects>
+</document>

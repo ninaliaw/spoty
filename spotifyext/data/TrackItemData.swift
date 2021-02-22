@@ -12,4 +12,5 @@ struct TrackItemData: Codable {
     let artists: [ArtistData]
     let name: String
     let duration_ms: Int
+    let id: String
 }
