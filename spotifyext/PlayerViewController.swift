@@ -40,8 +40,22 @@ class PlayerViewController : UIViewController {
     //
    //
     
+    var timer: Timer?
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadData()
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
+            self.loadData()
+        })
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+    }
+
+    func loadData() {
 //    }
 //    override func viewDidLoad() {
 //        super.viewDidLoad()

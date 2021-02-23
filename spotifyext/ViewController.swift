@@ -152,7 +152,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         case .failure(let error):
                             print(error)
                        }
-                    }
+                       }.responseJSON { (resp) in
+                        switch resp.result {
+                        case .success(let json):
+                            print(json)
+                        case .failure(let error):
+                            print(error)
+                        }
+                       }
         } else {
             AF.request("https://api.spotify.com/v1/search",
                        parameters: parameters,
